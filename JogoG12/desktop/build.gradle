@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+
+application {
+    mainClassName = 'br.com.jogoespacial.Main'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.badlogicgames.gdx:gdx:1.10.0'
+    implementation 'com.badlogicgames.gdx:gdx-box2d:1.10.0'
+    implementation 'com.badlogicgames.gdx:gdx-box2d-platform:1.10.0:natives-desktop'
+    implementation 'com.badlogicgames.gdx:gdx-platform:1.10.0:natives-desktop'
+}
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+task run(type: JavaExec) {
+    main = 'br.com.jogoespacial.Main'
+    classpath = sourceSets.main.runtimeClasspath
+}

@@ -1,4 +1,33 @@
-dependencies {
-    implementation 'com.badlogicgames.gdx:gdx:1.12.0'
-    implementation 'com.badlogicgames.gdx:gdx-maps:1.12.0'
+plugins {
+    id 'java'
+    id 'com.badlogicgames.gdx' version '1.9.10'
 }
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+repositories {
+    mavenCentral()
+    maven { url 'https://repo.badlogicgames.com/artifactory/libs-release' }
+}
+
+dependencies {
+    implementation 'com.badlogicgames.gdx:gdx:1.9.10'
+    implementation 'com.badlogicgames.gdx:gdx-box2d:1.9.10'
+    implementation 'com.badlogicgames.gdx:gdx-box2d-platform:1.9.10:natives-desktop'
+    implementation 'com.badlogicgames.gdx:gdx-backend-lwjgl:1.9.10'
+    implementation 'com.badlogicgames.gdx:gdx-backend-lwjgl-platform:1.9.10:natives-desktop'
+}
+
+task copyAssets(type: Copy) {
+    from 'assets'
+    into "$buildDir/assets"
+}
+
+processResources {
+    filesMatching('**/*.properties') {
+        expand(project.properties)
+    }
+}
+
+build.dependsOn(copyAssets)
